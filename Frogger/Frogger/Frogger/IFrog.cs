@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frogger
 {
-    public interface Frog
+    public interface IFrog
     {
 
         #region Props
