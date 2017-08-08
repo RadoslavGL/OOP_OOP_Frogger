@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frogger
+namespace Frogger.Objects
 {
-    class Program
+    public class Frog : Object
     {
-        static void Main(string[] args)
-        {
-        }
+        //TO DO
     }
 }
