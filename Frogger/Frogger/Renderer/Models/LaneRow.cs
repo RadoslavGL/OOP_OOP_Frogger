@@ -14,12 +14,5 @@ namespace Frogger.Renderer.Models
         {
             //default-ен конструктор, ползвам го при инициализацията на модела
         }
-
-        public LaneRow(int frogX, int vehicleX, bool hasFrog) : base(frogX, vehicleX, hasFrog)
-        {
-        }//twa maj nema da trea
-
-
-        
     }
 }

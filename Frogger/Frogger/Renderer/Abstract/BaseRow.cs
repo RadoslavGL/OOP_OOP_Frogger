@@ -5,28 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Frogger.Renderer.Enums;
+using Frogger.Objects.Models;
 
 namespace Frogger.Renderer.Abstract
 {
     public abstract class BaseRow : IRow
     {
         private int frogX;
-        private bool hasFrog;
         private readonly RowID rowID;
         //при инициализирането на обектите в колекцията им се слага rowID и повече не се бара.
 
         public BaseRow(RowID initialRowID)
         {
-            this.FrogX = 0;
-            this.HasFrog = false;
             this.rowID = initialRowID;
         }
 
-        public BaseRow(int frogX, bool hasFrog)
-        {
-            this.FrogX = frogX;
-            this.HasFrog = hasFrog;
-        }
+        //public BaseRow(int frogX, bool hasFrog)
+        //{
+        //    this.FrogX = frogX;
+        //    this.HasFrog = hasFrog;
+        //}
 
         public RowID RowID
         {
@@ -42,7 +40,7 @@ namespace Frogger.Renderer.Abstract
             {
                 return this.frogX;
             }
-            private set
+            set //set-ва се от калкулатора
             {
                 this.frogX = value;
             }
@@ -52,11 +50,14 @@ namespace Frogger.Renderer.Abstract
         {
             get
             {
-                return this.hasFrog;
-            }
-            private set
-            {
-                this.hasFrog = value;
+                if ((int)RowID == Objects.Models.Swamp.Instance.Row)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

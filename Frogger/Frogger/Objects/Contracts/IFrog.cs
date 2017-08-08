@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Frogger
 {
-    public interface IFrog : IObject
+    public interface IFrog : ISubject
     {
         #region Props
-        int Lives { get; }
-        bool IsAlive { get; }
+        int Lives { get; set; }
+        bool IsAlive { get; set; }
         #endregion
     }
 }

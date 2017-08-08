@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Frogger
 {
-    public interface IVehicle : IObject
+    public interface IVehicle : ISubject
 
     {
-        int Speed { get; }
-        string Direction { get; }
+        int Speed { get; set; }
+        string Direction { get; set; }
     }
 }

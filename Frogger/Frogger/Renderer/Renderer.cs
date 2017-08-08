@@ -3,6 +3,8 @@ using Frogger.Renderer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Frogger.Utils;
+using Frogger.Renderer.Contracts;
 
 namespace Frogger.Renderer
 {
@@ -11,75 +13,20 @@ namespace Frogger.Renderer
         public static void Execute(int[] frogXRow, IDictionary<int, int> vehicleXRow)
         {
             //в калкулатора трябва да се правят сметките да не се застъпват жаба и vehicle.
-            //в този метод трябва да влизат единствено валидни стойности за отпечатване на обектите
-            //за бързина при рисуването ще пробвам с Console.SetCursorPosition(left, top);
+            //в този метод трябва да влизат единствено валидни стойности за отпечатване на обектите            
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
-                if (i == (int)RowID.Zero)
+                foreach (var item in RowCollection.RowCollection.Instance.Rows.ElementAt(i).ToString().Split('*'))
                 {
-                    //Заради шаренията по конзолата не съм го направил на ToString() от inforow-a
-                    InfoRow inforow = (InfoRow)RowCollection.RowCollection.Instance.Rows.First();
-                    int speed = inforow.Speed;
-                    int lives = inforow.Lives;
-                    int score = inforow.Score;
-                    //тва ако е мега бавно, ще взимам от калкулатора направо:  public static void Execute(int[] frogXRow, IDictionary<int, int> vehicleXRow, int speed, int lives, int score)
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.SetCursorPosition(10, 0);
-                    Console.WriteLine("{0}{3}{1}{3}{1}{3}{2}", '┌', '┬', '┐', new string('─', 25));
-                    Console.SetCursorPosition(10, 1);
-                    
-                    Console.SetCursorPosition(10, 2);
-                    Console.WriteLine("{0}{3}{1}{3}{1}{3}{2}", '└', '┴', '┘', new string('─', 25));
-
-                    //RowCollection.RowCollection.Instance.Rows.Add(new InfoRow());
-                }
-                else if (i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
-                {
-                    if (i != frogXRow[1]) //демек реда в който я няма жабата => hasFrog = false;
-                    {
-                        if (i== (int)RowID.First)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.WriteLine(string.Format("{0}\n{0}\n{0}\n", new string(' ',GlobalConstants.GlobalConstants.ScreenWidth))); //ako krashne -1
-                            Console.BackgroundColor = ConsoleColor.Black; //reset-вам background-a
-                        }
-                        else if (i == (int)RowID.Eighth)
-                        {
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.ForegroundColor= ConsoleColor.Red;
-                            Console.WriteLine(string.Format("Safe{0}Safe\n{1}\nZone!{2}Zone!\n",
-                                new string(' ', 92),
-                                new string(' ', GlobalConstants.GlobalConstants.ScreenWidth),
-                                new string(' ', 90))); //ako krashne -1
-                            Console.BackgroundColor = ConsoleColor.Black; //reset-вам background-a
-                        }
-                        //else за черния фон най долу не барам нищо
-                    }
-                    else //демек ако я има жабата
-                    {
-
-                    }
-                    
-                    //RowCollection.RowCollection.Instance.Rows.Add(new SafeZoneRow((RowID)i));
-                }
-                else
-                {
-                    //RowCollection.RowCollection.Instance.Rows.Add(new LaneRow((RowID)i));
+                    Console.WriteLine(item);
                 }
             }
 
-            //StringBuilder render = new StringBuilder();
-            //render.Append(string.Format());
+            
 
 
-            //Console.WriteLine(new InfoRow(speed, lives, score).ToString()); ////към няква променлива стрингбуилдер
-
-            ////проверка if жабата е преди колата, след колата или не е на реда
-
-            //RowCollection.RowCollection.Instance.Rows.
 
         }
         public static void InitializeRenderer()
@@ -87,15 +34,15 @@ namespace Frogger.Renderer
             //методът се вика само веднъж в Engine-a; задава размерите на прозорчето; зарежда в RAM-та колекцията с обекти от тип Row RowID = [0..15] = 16 броя, после в калкулатора им се променят стойностите във field-овете, тук се четат и визуализират
 
             // - задава размерите на прозорчето;
-            Console.SetBufferSize(GlobalConstants.GlobalConstants.ScreenWidth, GlobalConstants.GlobalConstants.ScreenHeight);
-            Console.SetWindowSize(GlobalConstants.GlobalConstants.ScreenWidth, GlobalConstants.GlobalConstants.ScreenHeight);
+            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
 
             // - зареждане на колекцията с обекти от тип Row RowID = [0..15] = 16 броя. По-долу има коментар относно
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
                 if (i == (int)RowID.Zero)
                 {
-                    RowCollection.RowCollection.Instance.Rows.Add(new InfoRow());
+                    RowCollection.RowCollection.Instance.Rows.Add(new InfoRow((RowID)i));
                 }
                 else if (i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                 {
@@ -123,9 +70,11 @@ Console.BufferHeight = 48; n
 * те имат най-долу един ред празен, предполагам за естетика
 
 Първо с началото на играта се създава колекция ICollection от обекти тип Row с пропъртита: x,row на жаба и x,row на кола
- *  те може би да имат методи   ToStringRow1
- *                              ToStringRow2
- *                              ToStringRow3
+ *  те може би да имат методи   Tostring()
+ *  jabata: "{0} {1} {2}", първо редче от жабата, второ редче от жабата, трето редче от жабата
+ *  колата: по същия начин
+ *  редчетата са разделени със space, по който тук stringSplit-вам
+ *  
  *  Row-a проверява къде се намират по х по у и смята кое къде и изплюва къде и колко white space да сложи
  *  Renderer-a има методи ToStringRow1
  *                        ToStringRow2
@@ -174,3 +123,57 @@ Console.BufferHeight = 48; n
          * frogXRowID / vehicleXRowID
          * печелим 1: че сме ползвали енумерация 2: някак си IDictionary<int,RowID> vehicleXRow е по - пригледно от IDictionary<int,int> vehicleXRow
          */
+
+
+/*
+ * Архив
+ * 
+ * 
+        if (i == (int)RowID.Zero)
+        {
+
+        }
+        else if (i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
+        {
+            if (i != frogXRow[1]) //демек реда в който я няма жабата => hasFrog = false;
+            {
+                if (i == (int)RowID.First)
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(string.Format("{0}\n{0}\n{0}\n", new string(' ', GlobalConstants.GlobalConstants.ScreenWidth))); //ako krashne -1
+                    Console.BackgroundColor = ConsoleColor.Black; //reset-вам background-a
+                }
+                else if (i == (int)RowID.Eighth)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(string.Format("Safe{0}Safe\n{1}\nZone!{2}Zone!\n",
+                        new string(' ', 92),
+                        new string(' ', GlobalConstants.GlobalConstants.ScreenWidth),
+                        new string(' ', 90))); //ako krashne -1
+                    Console.BackgroundColor = ConsoleColor.Black; //reset-вам background-a
+                }
+                //else за черния фон най долу не барам нищо
+            }
+            else //демек ако я има жабата
+            {
+
+            }
+
+            //RowCollection.RowCollection.Instance.Rows.Add(new SafeZoneRow((RowID)i));
+        }
+        else
+        {
+            //RowCollection.RowCollection.Instance.Rows.Add(new LaneRow((RowID)i));
+        }
+
+        //StringBuilder render = new StringBuilder();
+        //render.Append(string.Format());
+
+
+        //Console.WriteLine(new InfoRow(speed, lives, score).ToString()); ////към няква променлива стрингбуилдер
+
+        ////проверка if жабата е преди колата, след колата или не е на реда
+
+        //RowCollection.RowCollection.Instance.Rows.
+ * */

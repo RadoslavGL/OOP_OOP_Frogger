@@ -11,9 +11,9 @@ namespace Frogger.Tester
     {
         public static void RunTest()
         {
-            Renderer.Renderer.InitializeRenderer();
-            Console.WriteLine(Renderer.RowCollection.RowCollection.Instance.Rows.First().ToString()); //bah maamu
-            Renderer.Renderer.Execute();
+            //Renderer.Renderer.InitializeRenderer();
+            //Console.WriteLine(Renderer.RowCollection.RowCollection.Instance.Rows.First().ToString()); //bah maamu
+            //Renderer.Renderer.Execute();
         }
     }
 }

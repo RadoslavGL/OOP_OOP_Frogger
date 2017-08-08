@@ -16,9 +16,9 @@ namespace Frogger.Renderer.Abstract
         {
         }
 
-        public BaseSafeZoneRow(int frogX, bool hasFrog): base(frogX, hasFrog)
-        {
-        }
+        //public BaseSafeZoneRow(int frogX, bool hasFrog): base(frogX, hasFrog)
+        //{
+        //}
         
         
     }

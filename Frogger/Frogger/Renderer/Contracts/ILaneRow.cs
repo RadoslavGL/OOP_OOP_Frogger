@@ -8,6 +8,6 @@ namespace Frogger.Renderer.Contracts
 {
     public interface ILaneRow : IRow
     {
-        int VehicleX { get; }
+        int VehicleX { get; set; }
     }
 }

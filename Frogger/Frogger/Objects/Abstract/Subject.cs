@@ -1,36 +1,46 @@
-﻿using Frogger.Renderer.Abstract;
-using Frogger.Renderer.Contracts;
-using Frogger.Renderer.Enums;
+﻿using Frogger.Objects.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frogger.Renderer
+namespace Frogger.Objects.Abstract
 {
-    public abstract class BaseLaneRow : BaseRow, ILaneRow
+    public abstract class Subject : ISubject
     {
-        private int vehicleX;
-        //ако има време може и vehicleLength
+        private int x;
+        private int row;
 
-        public BaseLaneRow(RowID initialRowID) : base(initialRowID)
+        public Subject()
         {
             //ем, те като се създават обектите не е необходимо да ги инициализирам със стойности
             //защото и без друго веднага ще бъдат overwrite-нати в калкулатора
         }
 
-        public int VehicleX
+        public int X
         {
             get
             {
-                return this.vehicleX;
+                return this.x;
             }
-            set //set-ва се от калкулатора    
+            set
             {
-                this.vehicleX = value;
+                this.x = value;
             }
         }
-        
+
+        public int Row
+        {
+            get
+            {
+                return this.row;
+            }
+            set
+            {
+                this.row = value;
+            }
+        }
+
     }
 }

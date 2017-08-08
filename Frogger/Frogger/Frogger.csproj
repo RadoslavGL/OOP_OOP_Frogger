@@ -42,12 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalConstants\GlobalConstants.cs" />
-    <Compile Include="Objects\Abstract\Object.cs" />
-    <Compile Include="Objects\Contracts\IFrog.cs" />
-    <Compile Include="Objects\Contracts\IObject.cs" />
-    <Compile Include="Objects\Contracts\IVehicle.cs" />
     <Compile Include="Objects\Models\Frog.cs" />
+    <Compile Include="Utils\GlobalConstants.cs" />
+    <Compile Include="Objects\Abstract\Subject.cs" />
+    <Compile Include="Objects\Contracts\IFrog.cs" />
+    <Compile Include="Objects\Contracts\ISubject.cs" />
+    <Compile Include="Objects\Contracts\IVehicle.cs" />
+    <Compile Include="Objects\Models\Swamp.cs" />
     <Compile Include="Objects\Models\Vehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

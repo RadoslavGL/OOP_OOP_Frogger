@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frogger.Objects
+namespace Frogger.Objects.Models
 {
     public class Vehicle : Object
     {

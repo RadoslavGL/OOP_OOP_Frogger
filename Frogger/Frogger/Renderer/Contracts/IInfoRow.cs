@@ -9,8 +9,8 @@ namespace Frogger.Renderer.Contracts
 {
     public interface IInfoRow: IRowID
     {
-        int Speed { get; }
-        int Lives { get; }
-        int Score { get; }
+        int Speed { get; set; }
+        int Lives { get; set; }
+        int Score { get; set; }
     }
 }

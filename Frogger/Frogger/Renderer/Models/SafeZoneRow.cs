@@ -12,12 +12,7 @@ namespace Frogger.Renderer.Models
     {
         public SafeZoneRow(RowID initialRowID) : base(initialRowID)
         {
+            //default-ен конструктор, ползвам го при инициализацията на модела
         }
-
-        public SafeZoneRow(int frogX, bool hasFrog) : base(frogX, hasFrog)
-        {
-            
-        }
-        
     }
 }

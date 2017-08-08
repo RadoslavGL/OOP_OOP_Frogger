@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Frogger.Objects.Contracts
 {
-    public interface IObject
+    public interface ISubject
     {
-        int X { get; }
-        int Row { get; }
+        int X { get; set; }
+        int Row { get; set; }
     } //тези две пропъртита, понеже са общи за жабата и колата ги изнесох в базов интерфейс
     
 }
