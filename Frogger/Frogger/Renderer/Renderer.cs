@@ -10,16 +10,17 @@ namespace Frogger.Renderer
 {
     public static class Renderer
     {
-        public static void Execute(int[] frogXRow, IDictionary<int, int> vehicleXRow)
+        public static void Execute(   )//int[] frogXRow, IDictionary<int, int> vehicleXRow)
         {
             //в калкулатора трябва да се правят сметките да не се застъпват жаба и vehicle.
             //в този метод трябва да влизат единствено валидни стойности за отпечатване на обектите            
             Console.Clear();
-            Console.SetCursorPosition(0, 0);
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
                 foreach (var item in RowCollection.RowCollection.Instance.Rows.ElementAt(i).ToString().Split('*'))
                 {
+                    //на всеки Row ToString()-а му трябва да се сплитне по '*' => получава се
+                    //subString[0], subString[1], subString[2]
                     Console.WriteLine(item);
                 }
             }
@@ -34,8 +35,8 @@ namespace Frogger.Renderer
             //методът се вика само веднъж в Engine-a; задава размерите на прозорчето; зарежда в RAM-та колекцията с обекти от тип Row RowID = [0..15] = 16 броя, после в калкулатора им се променят стойностите във field-овете, тук се четат и визуализират
 
             // - задава размерите на прозорчето;
-            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
-            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+           // Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            //Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
 
             // - зареждане на колекцията с обекти от тип Row RowID = [0..15] = 16 броя. По-долу има коментар относно
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
