@@ -14,13 +14,13 @@ namespace Frogger.Renderer
         {
             //в калкулатора трябва да се правят сметките да не се застъпват жаба и vehicle.
             //в този метод трябва да влизат единствено валидни стойности за отпечатване на обектите            
+            //на всеки Row ToString()-а му трябва да се сплитне по '*' => получава се
+            //subString[0], subString[1], subString[2]
             Console.Clear();
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
                 foreach (var item in RowCollection.RowCollection.Instance.Rows.ElementAt(i).ToString().Split('*'))
                 {
-                    //на всеки Row ToString()-а му трябва да се сплитне по '*' => получава се
-                    //subString[0], subString[1], subString[2]
                     Console.WriteLine(item);
                 }
             }
@@ -74,7 +74,7 @@ Console.BufferHeight = 48; n
  *  те може би да имат методи   Tostring()
  *  jabata: "{0} {1} {2}", първо редче от жабата, второ редче от жабата, трето редче от жабата
  *  колата: по същия начин
- *  редчетата са разделени със space, по който тук stringSplit-вам
+ *  редчетата са разделени със *, по който тук stringSplit-вам
  *  
  *  Row-a проверява къде се намират по х по у и смята кое къде и изплюва къде и колко white space да сложи
  *  Renderer-a има методи ToStringRow1

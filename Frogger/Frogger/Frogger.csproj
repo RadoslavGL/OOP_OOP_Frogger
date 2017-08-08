@@ -53,8 +53,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer\Abstract\BaseRow.cs" />
-    <Compile Include="Renderer\Abstract\BaseLaneRow.cs" />
-    <Compile Include="Renderer\Abstract\BaseSafeZoneRow.cs" />
     <Compile Include="Renderer\Contracts\IInfoRow.cs" />
     <Compile Include="Renderer\Contracts\ILaneRow.cs" />
     <Compile Include="Renderer\Contracts\IRow.cs" />

@@ -44,8 +44,11 @@ namespace Frogger.Objects.Models
         }
 
         public override string ToString()
-        {// da go oprawq
-            return base.ToString();
+        {
+            return string.Format("{0}*{1}*{2}",
+            " @ @ ",
+            "\\(_)/",
+            " \\ / ");
         }
     }
 }

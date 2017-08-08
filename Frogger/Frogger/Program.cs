@@ -11,9 +11,7 @@ namespace Frogger
     {
         static void Main(string[] args)
         {
-            Renderer.Renderer.InitializeRenderer();
-            Renderer.Renderer.Execute();
-            
+            Tester.Tester.RunTest();
         }
     }
 }

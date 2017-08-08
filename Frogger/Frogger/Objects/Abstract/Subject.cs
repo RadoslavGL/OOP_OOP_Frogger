@@ -9,8 +9,8 @@ namespace Frogger.Objects.Abstract
 {
     public abstract class Subject : ISubject
     {
-        private int x;
-        private int row;
+        private int x = 7;
+        private int row = 1;
 
         public Subject()
         {
