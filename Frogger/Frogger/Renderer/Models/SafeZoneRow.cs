@@ -1,4 +1,5 @@
 ﻿using Frogger.Renderer.Abstract;
+using Frogger.Renderer.Contracts;
 using Frogger.Renderer.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frogger.Renderer.Models
 {
-    public class SafeZoneRow : BaseRow
+    public class SafeZoneRow : BaseRow, ISafeZoneRow
     {
         public SafeZoneRow(RowID initialRowID) : base(initialRowID)
         {

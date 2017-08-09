@@ -1,4 +1,6 @@
-﻿using Frogger.Renderer.Abstract;
+﻿using Frogger.Objects.Models;
+using Frogger.Renderer.Abstract;
+using Frogger.Renderer.Contracts;
 using Frogger.Renderer.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,27 +10,25 @@ using System.Threading.Tasks;
 
 namespace Frogger.Renderer.Models
 {
-    public class LaneRow : BaseRow
+    public class LaneRow : BaseRow, ILaneRow
     {
-        private int vehicleX;
-        //ако има време може и vehicleLength
+        //няма да е VehichleX, защото нямам само едно Vehicle => трябва да ги държа или в колекция
+        //или по-интелигентно във всеки LaneRow да има инстанция Vehicle, но по една, за това я правя readonly
 
+        private readonly Vehicle vehicleOnTheRow; //ако има време може и vehicleLength
+        
         public LaneRow(RowID initialRowID) : base(initialRowID)
         {
+            this.vehicleOnTheRow = new Vehicle();
             //default-ен конструктор, ползвам го при инициализацията на модела
-            //ем, те като се създават обектите не е необходимо да ги инициализирам със стойности
-            //защото и без друго веднага ще бъдат overwrite-нати в калкулатора
+            //във всеки LaneRow има по една количка, където да и се пазят персонално стойностите
         }
         
-        public int VehicleX
+        public IVehicle VehicleOnTheRow
         {
             get
             {
-                return this.vehicleX;
-            }
-            set //set-ва се от калкулатора    
-            {
-                this.vehicleX = value;
+                return this.vehicleOnTheRow;
             }
         }
 

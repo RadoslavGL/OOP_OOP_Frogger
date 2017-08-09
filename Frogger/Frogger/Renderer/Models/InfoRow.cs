@@ -1,4 +1,5 @@
-﻿using Frogger.Renderer.Contracts;
+﻿using Frogger.Objects.Models;
+using Frogger.Renderer.Contracts;
 using Frogger.Renderer.Enums;
 using System;
 using System.Collections.Generic;
@@ -48,11 +49,7 @@ namespace Frogger.Renderer
         {
             get
             {
-                return this.lives;
-            }
-            set
-            {
-                this.lives = value;
+                return Swamp.Instance.Lives;
             }
         }
 

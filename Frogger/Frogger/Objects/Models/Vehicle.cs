@@ -7,8 +7,36 @@ using System.Threading.Tasks;
 
 namespace Frogger.Objects.Models
 {
-    public class Vehicle : Subject
+    public class Vehicle : Subject, IVehicle
     {
-        //TO DO
+        private int speed;
+        private string direction;
+
+        public Vehicle()
+        {
+        }
+
+        public int Speed
+        {
+            get
+            {
+                return this.speed;
+            }
+            set
+            {
+                this.speed = value;
+            }
+        }
+        public string Direction
+        {
+            get
+            {
+                return this.direction;
+            }
+            set
+            {
+                this.direction = value;
+            }
+        }
     }
 }
