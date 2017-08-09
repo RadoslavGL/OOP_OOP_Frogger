@@ -14,7 +14,6 @@ namespace Frogger.Renderer
         //този ред е най горния и е със специална имплементация и не наследява никой
         //само трябва да вземе от някъде SPEED, LIVES и SCORE, които да display-ва
         private int speed;
-        private int lives;
         private int score;
         private readonly RowID rowID;
         //при инициализирането на обектите в колекцията им се слага rowID и повече не се бара.
@@ -78,7 +77,7 @@ namespace Frogger.Renderer
                 "SPEED:".PadLeft(13),   //6
                 this.speed.ToString().PadRight(12), //7
                 "LIVES:".PadLeft(13),               //8
-                string.Concat(Enumerable.Repeat("♥ ", this.lives)).PadRight(12),    //9
+                string.Concat(Enumerable.Repeat("♥ ", this.Lives)).PadRight(12),    //9
                 "SCORE:".PadLeft(13),                                               //10
                 this.score.ToString().PadRight(12), //11
                 '└',                                //12

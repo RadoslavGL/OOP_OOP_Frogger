@@ -34,7 +34,22 @@ namespace Frogger.Renderer.Models
 
         public override string ToString()
         {
-            return base.ToString();
+            if (base.HasFrog)
+            {
+                return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                    new string(' ', Swamp.Instance.X), //eventualno +/-1
+                    Swamp.Instance.ToString().Split('*')[0],
+                    Swamp.Instance.ToString().Split('*')[1],
+                    Swamp.Instance.ToString().Split('*')[2]);
+            }
+            else
+            {
+                return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                    new string(' ', this.VehicleOnTheRow.X), //eventualno +/-1
+                    this.VehicleOnTheRow.ToString().Split('*')[0],
+                    this.VehicleOnTheRow.ToString().Split('*')[1],
+                    this.VehicleOnTheRow.ToString().Split('*')[2]);
+            }
         }
     }
 }

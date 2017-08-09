@@ -12,5 +12,6 @@ namespace Frogger
     {
         int Speed { get; set; }
         string Direction { get; set; }
+        int VehicleLength { get; set; }
     }
 }

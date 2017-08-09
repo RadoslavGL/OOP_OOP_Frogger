@@ -58,7 +58,6 @@
     <Compile Include="Renderer\Contracts\IRow.cs" />
     <Compile Include="Renderer\Contracts\IRowCollection.cs" />
     <Compile Include="Renderer\Contracts\IRowID.cs" />
-    <Compile Include="Renderer\Contracts\ISafeZoneRow.cs" />
     <Compile Include="Renderer\Enums\RowID.cs" />
     <Compile Include="Renderer\Models\LaneRow.cs" />
     <Compile Include="Renderer\Models\SafeZoneRow.cs" />

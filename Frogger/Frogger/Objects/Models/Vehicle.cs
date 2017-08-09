@@ -11,6 +11,7 @@ namespace Frogger.Objects.Models
     {
         private int speed;
         private string direction;
+        private int vehicleLength;
 
         public Vehicle()
         {
@@ -27,6 +28,7 @@ namespace Frogger.Objects.Models
                 this.speed = value;
             }
         }
+
         public string Direction
         {
             get
@@ -37,6 +39,26 @@ namespace Frogger.Objects.Models
             {
                 this.direction = value;
             }
+        }
+
+        public int VehicleLength
+        {
+            get
+            {
+                return this.vehicleLength;
+            }
+            set
+            {
+                this.vehicleLength = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("__{0}__*  {1}  *-@{2}@-",
+                new string('_', 2 * this.vehicleLength),
+                string.Concat(Enumerable.Repeat("[]", this.vehicleLength)),
+                string.Concat(Enumerable.Repeat("--", this.vehicleLength)));
         }
     }
 }
