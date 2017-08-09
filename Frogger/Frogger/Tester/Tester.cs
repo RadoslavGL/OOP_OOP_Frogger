@@ -28,28 +28,22 @@ namespace Frogger.Tester
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
                 {
                     Swamp.Instance.Row = GenerateNum(randNum, 1, 15);
-                    if (i == (int)RowID.Zero)
+                    Swamp.Instance.X = GenerateNum(randNum, 1, 35);
+                    if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                     {
-                    }
-                    else if (i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
-                    {
-                        SafeZoneRow pesho = (SafeZoneRow)RowCollection.Instance.Rows.ElementAt(i);
-
-                        pesho.FrogX = GenerateNum(randNum, 20, 50);
                     }
                     else
                     {
                         LaneRow pesho = (LaneRow)RowCollection.Instance.Rows.ElementAt(i);
 
-                        pesho.FrogX = GenerateNum(randNum, 20, 50);
-                        pesho.VehicleOnTheRow.X = GenerateNum(randNum, 20, 50);
+                        pesho.VehicleOnTheRow.X = GenerateNum(randNum, 20, 30);
                         pesho.VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 6);
                     }
                 } 
 
                 Renderer.Renderer.Execute();
-                Thread.Sleep(60);
-                Console.Clear();
+                //Thread.Sleep(60);
+                //Console.Clear();
             }
 
 

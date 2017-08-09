@@ -12,7 +12,6 @@ namespace Frogger.Renderer.Abstract
     public abstract class BaseRow : IRow
     {
         //tuka ima property bool HasFrog;
-        private int frogX;
         private readonly RowID rowID;
         //при инициализирането на обектите в колекцията им се слага rowID и повече не се бара.
 
@@ -32,18 +31,6 @@ namespace Frogger.Renderer.Abstract
             get
             {
                 return this.rowID;
-            }
-        }
-
-        public int FrogX
-        {
-            get
-            {
-                return this.frogX;
-            }
-            set //set-ва се от калкулатора
-            {
-                this.frogX = value;
             }
         }
 

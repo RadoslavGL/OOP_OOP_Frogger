@@ -9,7 +9,6 @@ namespace Frogger.Renderer.Contracts
 {
     public interface IRow : IRowID
     {
-        int FrogX { get; set; }
         bool HasFrog { get; }
     }
 }

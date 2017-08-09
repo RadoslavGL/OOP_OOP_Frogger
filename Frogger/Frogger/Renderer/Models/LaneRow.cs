@@ -2,6 +2,7 @@
 using Frogger.Renderer.Abstract;
 using Frogger.Renderer.Contracts;
 using Frogger.Renderer.Enums;
+using Frogger.Renderer.RowCollection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +37,24 @@ namespace Frogger.Renderer.Models
         {
             if (base.HasFrog)
             {
-                return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
-                    new string(' ', Swamp.Instance.X), //eventualno +/-1
-                    Swamp.Instance.ToString().Split('*')[0],
-                    Swamp.Instance.ToString().Split('*')[1],
-                    Swamp.Instance.ToString().Split('*')[2]);
+                if (Swamp.Instance.X >
+                    this.VehicleOnTheRow.X +
+                    this.VehicleOnTheRow.ToString().Split('*')[0].Length)
+                {
+                    return string.Format("{0}{1}{2}{3}\n{0}{4}{2}{5}\n{0}{6}{2}{7}", //празно, кола, празно, жаба\n
+                        new string(' ', this.VehicleOnTheRow.X - 1),
+                        this.VehicleOnTheRow.ToString().Split('*')[0],
+                        new string(' ', Swamp.Instance.X - this.VehicleOnTheRow.X - this.VehicleOnTheRow.ToString().Split('*')[0].Length),
+                        Swamp.Instance.ToString().Split('*')[0],
+                        this.VehicleOnTheRow.ToString().Split('*')[1],
+                        Swamp.Instance.ToString().Split('*')[1],
+                        this.VehicleOnTheRow.ToString().Split('*')[2],
+                        Swamp.Instance.ToString().Split('*')[3]);
+                }
+                else return "pesho";
+                //else if ()
+                //{
+                //}
             }
             else
             {

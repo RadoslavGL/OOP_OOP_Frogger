@@ -6,6 +6,7 @@ using System.Linq;
 using Frogger.Utils;
 using Frogger.Renderer.Contracts;
 using Frogger.Objects.Models;
+using System.Threading;
 
 namespace Frogger.Renderer
 {
@@ -18,7 +19,7 @@ namespace Frogger.Renderer
             //на всеки Row ToString()-а му трябва да се сплитне по '*' => получава се
             //subString[0], subString[1], subString[2]
             
-            //Console.Clear();
+            Console.Clear();
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
                 foreach (var item in RowCollection.RowCollection.Instance.Rows.ElementAt(i).ToString().Split('*'))
@@ -26,6 +27,7 @@ namespace Frogger.Renderer
                     Console.WriteLine(item);
                 }
             }
+            Thread.Sleep(1000);
             //Console.Clear();
 
 
