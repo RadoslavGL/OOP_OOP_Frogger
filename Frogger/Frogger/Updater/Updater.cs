@@ -23,8 +23,8 @@ namespace Frogger.Updater
             {
                 Renderer.Renderer.Execute();
 
-                Updater.FroggerMover();
-
+                FroggerMover();
+                ScoreUpdater();
                 //smenqт се стойностите и евентиално IsAlive-а на жабата
 
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
@@ -65,7 +65,7 @@ namespace Frogger.Updater
             }
         }
 
-        public static void FroggerMover()
+        private static void FroggerMover()
         {
             while (Console.KeyAvailable)
             {
@@ -105,9 +105,19 @@ namespace Frogger.Updater
             }
         }
 
+        private static void ScoreUpdater()
+        {
+            if (Swamp.Instance.Row == 1)
+            {
+                ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Score++;
+                Swamp.Instance.Row = 15;
+                Swamp.Instance.X = 47;
+            }
+        }
+
         private static void VehicleSpeedModifier(LaneRow currentVehicle)
         {
-            currentVehicle.VehicleOnTheRow.Speed = RandomNumGenerator(2, 4);
+            currentVehicle.VehicleOnTheRow.Speed = RandomNumGenerator(2, 7);
         }
 
         private static void VehicleLengthModifier(LaneRow currentVehicle)
