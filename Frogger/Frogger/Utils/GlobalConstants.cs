@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Frogger.Utils
 {
-    public class GlobalConstants
+    public static class GlobalConstants
     {
         public const int ScreenWidth = 100;
-        public const int ScreenHeight = 48;
+        public const int ScreenHeight = 49;
     }
 }

@@ -22,27 +22,32 @@ namespace Frogger.Tester
 
             Renderer.Renderer.InitializeRenderer();
             //Console.WriteLine(Renderer.RowCollection.RowCollection.Instance.Rows.First().ToString()); //bah maamu
-            
+
+            LaneRow pesho;
+
+
             while (true)
             {
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
                 {
-                    Swamp.Instance.Row = GenerateNum(randNum, 1, 15);
-                    Swamp.Instance.X = GenerateNum(randNum, 1, 35);
+                    Swamp.Instance.Row = GenerateNum(randNum, 1, 15); //zaradi tova zabiva
+                    Swamp.Instance.X = GenerateNum(randNum, 1, 35); //zaradi tova zabiva
                     if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                     {
                     }
                     else
                     {
-                        LaneRow pesho = (LaneRow)RowCollection.Instance.Rows.ElementAt(i);
+                        pesho = (LaneRow)RowCollection.Instance.Rows.ElementAt(i);
 
-                        pesho.VehicleOnTheRow.X = GenerateNum(randNum, 20, 30);
+                        pesho.VehicleOnTheRow.X = VehicleMovement(pesho.VehicleOnTheRow.X);
                         pesho.VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 6);
+
+                        //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X
                     }
-                } 
+                }
 
                 Renderer.Renderer.Execute();
-                //Thread.Sleep(60);
+                //Thread.Sleep(1);
                 //Console.Clear();
             }
 
@@ -52,5 +57,20 @@ namespace Frogger.Tester
         {
             return randNum.Next(min, max);
         }
+
+        private static int VehicleMovement(int input)
+        {
+            int result = input - GenerateNum(new Random(), 5, 15);
+            if (input < 0)
+            {
+                result = 99;
+            }
+            else
+            {
+                return result;
+            }
+            return result;
+        }
+
     }
 }

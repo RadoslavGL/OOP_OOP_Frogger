@@ -27,10 +27,10 @@ namespace Frogger.Renderer
                     Console.WriteLine(item);
                 }
             }
-            Thread.Sleep(1000);
+            //Thread.Sleep(100);
             //Console.Clear();
 
-
+            
 
 
         }
@@ -39,8 +39,9 @@ namespace Frogger.Renderer
             //методът се вика само веднъж в Engine-a; задава размерите на прозорчето; зарежда в RAM-та колекцията с обекти от тип Row RowID = [0..15] = 16 броя, после в калкулатора им се променят стойностите във field-овете, тук се четат и визуализират
 
             // - задава размерите на прозорчето;
-            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight+1);
-            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight+1);
+            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            
 
             // - зареждане на колекцията с обекти от тип Row RowID = [0..15] = 16 броя. По-долу има коментар относно
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
