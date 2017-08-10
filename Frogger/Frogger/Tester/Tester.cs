@@ -27,7 +27,7 @@ namespace Frogger.Tester
             {
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
                 {
-                    Swamp.Instance.Row = GenerateNum(randNum, 1, 15); //може да е на между редове с индекси 1 и 15
+                    Swamp.Instance.Row = GenerateNum(randNum, 1, 16); //може да е на между редове с индекси 1 и 15
                     Swamp.Instance.X = GenerateNum(randNum, 0, 94); // може да е на позоция между 0 и 94 включително тя няма как със стрелките да излезе странично примерно извън екрана
                     
                     if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
@@ -41,7 +41,7 @@ namespace Frogger.Tester
                 }
 
                 Renderer.Renderer.Execute();
-                //Thread.Sleep(400);
+                //Thread.Sleep(100);
                 //break;
                 
             }

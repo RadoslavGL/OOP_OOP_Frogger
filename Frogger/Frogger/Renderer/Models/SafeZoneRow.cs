@@ -22,14 +22,14 @@ namespace Frogger.Renderer.Models
             if (base.HasFrog)
             {
                 return string.Format("{0}{1}*{0}{2}*{0}{3}",
-                    new string(' ', Objects.Models.Swamp.Instance.X), //eventualno +/-1
+                    new string(' ', Swamp.Instance.X), //eventualno +/-1
                     Swamp.Instance.ToString().Split('*')[0],
                     Swamp.Instance.ToString().Split('*')[1],
                     Swamp.Instance.ToString().Split('*')[2]);
             }
             else
             {
-                return "\n*\n";
+                return "\n*";
             }
         }
     }

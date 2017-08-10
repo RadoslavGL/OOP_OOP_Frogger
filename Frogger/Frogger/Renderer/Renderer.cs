@@ -27,7 +27,7 @@ namespace Frogger.Renderer
                     Console.WriteLine(item);
                 }
             }
-            //Thread.Sleep(100);
+           // Thread.Sleep(200);
             //Console.Clear();
 
             
