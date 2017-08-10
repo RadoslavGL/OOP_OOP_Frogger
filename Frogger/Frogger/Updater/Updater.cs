@@ -1,4 +1,5 @@
 ﻿using Frogger.Objects.Models;
+using Frogger.Renderer;
 using Frogger.Renderer.Enums;
 using Frogger.Renderer.Models;
 using Frogger.Renderer.RowCollection;
@@ -36,15 +37,25 @@ namespace Frogger.Updater
                     }
                     else
                     {
-                        ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = 2; //GenerateNum(randNum, 1, 4);
+                        //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = 2; //GenerateNum(randNum, 1, 4);
 
-                        if (((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X + 1 > 99)
+                        if (((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X + 1 > 95)
                         {
+                            VehicleSpeedModifier((LaneRow)RowCollection.Instance.Rows.ElementAt(i));
+                            VehicleLengthModifier((LaneRow)RowCollection.Instance.Rows.ElementAt(i));
                             ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = 0; //GenerateNum(randNum, 0, 99);
                         }
                         else
                         {
-                            ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X++;
+                            int tempSpeed = ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.Speed;
+                            int currentVehiclePosition = ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X;
+                            int currentVehicleLengt = ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength;
+
+                            if ((currentVehiclePosition  + currentVehicleLengt) <= 97)
+                            {
+                                ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X += tempSpeed;
+                            }
+                            
                         }
 
                         //беше бавно, написах това и стана бързо???
@@ -81,7 +92,34 @@ namespace Frogger.Updater
                 {
                     Swamp.Instance.X += GlobalConstants.frogStepToTheSides;
                 }
+                else if (key.Key == ConsoleKey.OemMinus && 
+                        ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed > 0)
+                {
+                    ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed--;
+                }
+                else if (key.Key == ConsoleKey.OemPlus &&
+                        ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed < 10)
+                {
+                    ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed++;
+                }
             }
         }
+
+        private static void VehicleSpeedModifier(LaneRow currentVehicle)
+        {
+            currentVehicle.VehicleOnTheRow.Speed = RandomNumGenerator(2, 4);
+        }
+
+        private static void VehicleLengthModifier(LaneRow currentVehicle)
+        {
+            currentVehicle.VehicleOnTheRow.VehicleLength = RandomNumGenerator(1, 5);
+        }
+
+        private static int RandomNumGenerator(int min, int max)
+        {
+            Random randNum = new Random();
+            return randNum.Next(min, max);
+        }
+
     }
 }

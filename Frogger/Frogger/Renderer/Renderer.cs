@@ -67,8 +67,10 @@ namespace Frogger.Renderer
 
                     //да спестя един цикъл ще set-на тук стартовите позиции и дължините на колите
                     RowCollection.RowCollection.Instance.Rows.Add(new LaneRow((RowID)i));
+                    ((LaneRow)RowCollection.RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.Speed = randNum.Next(1, 5);
                     ((LaneRow)RowCollection.RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = randNum.Next(0, 99);
                     ((LaneRow)RowCollection.RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = randNum.Next(1, 3);
+
                 }
             }
         }
