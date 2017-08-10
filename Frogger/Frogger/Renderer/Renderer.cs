@@ -40,7 +40,7 @@ namespace Frogger.Renderer
 
             // - задава размерите на прозорчето;
             Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
-            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            //Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
             
 
             // - зареждане на колекцията с обекти от тип Row RowID = [0..15] = 16 броя. По-долу има коментар относно

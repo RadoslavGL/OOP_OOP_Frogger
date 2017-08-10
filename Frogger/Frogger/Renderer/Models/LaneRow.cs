@@ -18,14 +18,14 @@ namespace Frogger.Renderer.Models
         //или по-интелигентно във всеки LaneRow да има инстанция Vehicle, но по една, за това я правя readonly
 
         private readonly Vehicle vehicleOnTheRow; //ако има време може и vehicleLength
-        
+
         public LaneRow(RowID initialRowID) : base(initialRowID)
         {
             this.vehicleOnTheRow = new Vehicle();
             //default-ен конструктор, ползвам го при инициализацията на модела
             //във всеки LaneRow има по една количка, където да и се пазят персонално стойностите
         }
-        
+
         public IVehicle VehicleOnTheRow
         {
             get
@@ -40,12 +40,12 @@ namespace Frogger.Renderer.Models
             {
                 if (Swamp.Instance.X >
                     this.VehicleOnTheRow.X +
-                    this.VehicleOnTheRow.ToString().Split('*')[0].Length-1)
+                    this.VehicleOnTheRow.ToString().Split('*')[0].Length)
                 {
                     return string.Format("{0}{1}{2}{3}\n{0}{4}{2}{5}\n{0}{6}{2}{7}", //празно, кола, празно, жаба\n
-                        new string(' ', this.VehicleOnTheRow.X - 1),        //0
+                        new string(' ', this.VehicleOnTheRow.X),        //0
                         this.VehicleOnTheRow.ToString().Split('*')[0],      //1
-                        new string(' ', Swamp.Instance.X - this.VehicleOnTheRow.X - this.VehicleOnTheRow.ToString().Split('*')[0].Length-1),    //2
+                        new string(' ', Swamp.Instance.X - this.VehicleOnTheRow.X - this.VehicleOnTheRow.ToString().Split('*')[0].Length),    //2
                         Swamp.Instance.ToString().Split('*')[0],            //3
                         this.VehicleOnTheRow.ToString().Split('*')[1],      //4
                         Swamp.Instance.ToString().Split('*')[1],            //5
@@ -56,38 +56,37 @@ namespace Frogger.Renderer.Models
                 //else if ()
                 //{
                 //}
-                
-                    
+
+
 
             }
             else
             {
-                return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
-                    new string(' ', this.VehicleOnTheRow.X), //eventualno +/-1
+                if (this.VehicleOnTheRow.X <= //ако Х на колата е по-малко или равно 
+                (GlobalConstants.ScreenWidth - 1) - this.VehicleOnTheRow.VehicleLength) //на размера на екрана минус размера на колата, който се задава динамично от генератор
+                {
+                    return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                    new string(' ', this.VehicleOnTheRow.X),
                     this.VehicleOnTheRow.ToString().Split('*')[0],
                     this.VehicleOnTheRow.ToString().Split('*')[1],
                     this.VehicleOnTheRow.ToString().Split('*')[2]);
-               // string joro = "";
-                //
-                // Summary:
-                //     Returns a new string in which all the characters in the current instance, beginning
-                //     at a specified position and continuing through the last position, have been deleted.
-                //
-                // Parameters:
-                //   startIndex:
-                //     The zero-based position to begin deleting characters.
-                //
-                // Returns:
-                //     A new string that is equivalent to this string except for the removed characters.
-                //
-                // Exceptions:
-                //   T:System.ArgumentOutOfRangeException:
-                //     startIndex is less than zero.-or- startIndex specifies a position that is not
-                //     within this string.
-                //public String Remove(int startIndex);
-                //joro.Remove();
-                //GlobalConstants.ScreenWidth-this.VehicleOnTheRow.VehicleLength
-
+                }
+                else //ако Х на колата е между размера на екрана минус дължината
+                     //на колата (динамична) и размера на екрана => трябва да се отреже малко от края й,
+                     //което става по следния начин:
+                     //string pesho = "asdfghjkl";
+                     //Console.WriteLine(pesho.Length); //9
+                     //Console.WriteLine(pesho.Remove(5)); //"asdfg"
+                {
+                    return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                    new string(' ', this.VehicleOnTheRow.X), //това е така
+                    this.VehicleOnTheRow.ToString().Split('*')[0].
+                    Remove(GlobalConstants.ScreenWidth-this.VehicleOnTheRow.X),
+                    this.VehicleOnTheRow.ToString().Split('*')[1].
+                    Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X),
+                    this.VehicleOnTheRow.ToString().Split('*')[2].
+                    Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X));
+                }
             }
         }
     }

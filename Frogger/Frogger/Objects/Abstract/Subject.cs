@@ -9,8 +9,8 @@ namespace Frogger.Objects.Abstract
 {
     public abstract class Subject : ISubject
     {
-        private int x = 3;
-        private int row = 3;
+        private int x;  //frogX максималното е =94, при по-голямо има проблеми
+        private int row;
 
         public Subject()
         {

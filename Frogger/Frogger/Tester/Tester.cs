@@ -11,6 +11,7 @@ using Frogger.Renderer.RowCollection;
 using Frogger.Renderer.Contracts;
 using Frogger.Renderer;
 using Frogger.Renderer.Models;
+using Frogger.Utils;
 
 namespace Frogger.Tester
 {
@@ -21,35 +22,37 @@ namespace Frogger.Tester
             Random randNum = new Random();
 
             Renderer.Renderer.InitializeRenderer();
-            //Console.WriteLine(Renderer.RowCollection.RowCollection.Instance.Rows.First().ToString()); //bah maamu
-
-            LaneRow pesho;
-
 
             while (true)
             {
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
                 {
-                    Swamp.Instance.Row = GenerateNum(randNum, 1, 15); //zaradi tova zabiva
-                    Swamp.Instance.X = GenerateNum(randNum, 1, 35); //zaradi tova zabiva
+                    Swamp.Instance.Row = GenerateNum(randNum, 1, 15); //може да е на между редове с индекси 1 и 15
+                    Swamp.Instance.X = GenerateNum(randNum, 0, 94); // може да е на позоция между 0 и 94 включително
+                    
                     if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                     {
                     }
                     else
                     {
-                        pesho = (LaneRow)RowCollection.Instance.Rows.ElementAt(i);
-
-                        pesho.VehicleOnTheRow.X = VehicleMovement(pesho.VehicleOnTheRow.X);
-                        pesho.VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 6);
-
-                        //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X
+                        ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 4);
+                        ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = GenerateNum(randNum, 0, 70);// GenerateNum(randNum, 0, 80);
+                        //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 6);
                     }
                 }
 
                 Renderer.Renderer.Execute();
-                //Thread.Sleep(1);
-                //Console.Clear();
+                //Thread.Sleep(1000);
+                break;
+                
             }
+
+            
+                
+                
+
+
+
 
 
         }
