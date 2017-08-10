@@ -18,7 +18,7 @@ namespace Frogger.Updater
         {
             ////казвам количките да тръгват от нулата (най-ляво)
             //short vehiclePosition = 0;
-
+            int gameSpeed = ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed;
             while (Swamp.Instance.IsAlive)
             {
                 Renderer.Renderer.Execute();
@@ -51,9 +51,9 @@ namespace Frogger.Updater
                             int currentVehiclePosition = ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X;
                             int currentVehicleLengt = ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength;
 
-                            if ((currentVehiclePosition  + currentVehicleLengt) <= 97)
+                            if ((currentVehiclePosition  + currentVehicleLengt + gameSpeed) <= 97)
                             {
-                                ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X += tempSpeed;
+                                ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X += tempSpeed + gameSpeed;
                             }
                             
                         }
@@ -98,7 +98,7 @@ namespace Frogger.Updater
                     ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed--;
                 }
                 else if (key.Key == ConsoleKey.OemPlus &&
-                        ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed < 10)
+                        ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed < 4)
                 {
                     ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed++;
                 }
