@@ -14,9 +14,11 @@ namespace Frogger.Renderer.RowCollection
         private RowCollection()
         {
             this.Rows = new List<IRowID>();
+            //this.Rows = new IRowID[16];
         }
-        
+
         public ICollection<IRowID> Rows
+        //public IRowID[] Rows
         {
             get;
             private set;
@@ -29,6 +31,7 @@ namespace Frogger.Renderer.RowCollection
                 return instance;
             }
         }
+        
     }
 }
 /*

@@ -8,6 +8,7 @@ namespace Frogger.Renderer.Contracts
 {
     public interface IRowCollection
     {
+        //IRowID[] Rows { get; }
         ICollection<IRowID> Rows { get; }
     }
 }

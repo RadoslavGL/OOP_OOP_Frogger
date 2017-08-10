@@ -42,7 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\Screens\Screens.cs" />
+    <Compile Include="Objects\Enums\VehicleDirection.cs" />
     <Compile Include="Objects\Models\Frog.cs" />
+    <Compile Include="Updater\Updater.cs" />
     <Compile Include="Utils\GlobalConstants.cs" />
     <Compile Include="Objects\Abstract\Subject.cs" />
     <Compile Include="Objects\Contracts\IFrog.cs" />

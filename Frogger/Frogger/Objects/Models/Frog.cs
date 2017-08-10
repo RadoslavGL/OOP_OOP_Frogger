@@ -9,11 +9,13 @@ namespace Frogger.Objects.Models
 {
     public class Frog : Subject, IFrog
     {
-        private int lives;
+        private int lives = 3;
         private bool isAlive;
 
         public Frog() : base()
         {
+            base.X = 47;
+            base.Row = 15;
             //жабата се създава само веднъж в блатото (Swamp)
             //при създаването не е необходимо въвеждане на стойности,
             //в калкулатора ще се сменят и без друго

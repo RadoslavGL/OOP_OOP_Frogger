@@ -12,13 +12,23 @@ namespace Frogger.Renderer
 {
     public static class Renderer
     {
-        public static void Execute(   )//int[] frogXRow, IDictionary<int, int> vehicleXRow)
+        public static void Execute()
         {
             //в калкулатора трябва да се правят сметките да не се застъпват жаба и vehicle.
             //в този метод трябва да влизат единствено валидни стойности за отпечатване на обектите            
             //на всеки Row ToString()-а му трябва да се сплитне по '*' => получава се
             //subString[0], subString[1], subString[2]
-            
+
+            //Console.Clear();
+            //for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
+            //{
+
+            //    foreach (var item in RowCollection.RowCollection.Instance.Rows[i].ToString().Split('*'))
+            //    {
+            //        Console.WriteLine(item);
+            //    }
+            //}
+
             Console.Clear();
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
@@ -27,41 +37,40 @@ namespace Frogger.Renderer
                     Console.WriteLine(item);
                 }
             }
-           // Thread.Sleep(200);
-            //Console.Clear();
 
-            
+            //RowCollection.RowCollection.Instance.Rows[4]
 
-
+            Thread.Sleep(GlobalConstants.delayer);
         }
         public static void InitializeRenderer()
         {
-            //методът се вика само веднъж в Engine-a; задава размерите на прозорчето; зарежда в RAM-та колекцията с обекти от тип Row RowID = [0..15] = 16 броя, после в калкулатора им се променят стойностите във field-овете, тук се четат и визуализират
+            // зарежда генератора на числа
+            Random randNum = new Random();
 
-            // - задава размерите на прозорчето;
-            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
-            //Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
-            
-
-            // - зареждане на колекцията с обекти от тип Row RowID = [0..15] = 16 броя. По-долу има коментар относно
             for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
             {
                 if (i == (int)RowID.Zero)
                 {
+                    //RowCollection.RowCollection.Instance.Rows[i] = new InfoRow((RowID)i);
                     RowCollection.RowCollection.Instance.Rows.Add(new InfoRow((RowID)i));
                 }
                 else if (i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                 {
+                    //RowCollection.RowCollection.Instance.Rows[i] =new SafeZoneRow((RowID)i);
                     RowCollection.RowCollection.Instance.Rows.Add(new SafeZoneRow((RowID)i));
                 }
                 else
                 {
-                    RowCollection.RowCollection.Instance.Rows.Add(new LaneRow((RowID)i));
-                }
-            } //и никъде не се виждат числа
+                    //RowCollection.RowCollection.Instance.Rows[i] =new LaneRow((RowID)i);
+                    //((LaneRow)RowCollection.RowCollection.Instance.Rows[i]).VehicleOnTheRow.X = randNum.Next(0, 99);
+                    //((LaneRow)RowCollection.RowCollection.Instance.Rows[i]).VehicleOnTheRow.VehicleLength = randNum.Next(1, 3);
 
-            // - зареждане на жабата
-            bool pesho = Swamp.Instance.IsAlive; //lame, но работи. надявам се
+                    //да спестя един цикъл ще set-на тук стартовите позиции и дължините на колите
+                    RowCollection.RowCollection.Instance.Rows.Add(new LaneRow((RowID)i));
+                    ((LaneRow)RowCollection.RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = randNum.Next(0, 99);
+                    ((LaneRow)RowCollection.RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = randNum.Next(1, 3);
+                }
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Frogger.Renderer;
+using Frogger.Utils;
 
 namespace Frogger
 {
@@ -11,7 +12,9 @@ namespace Frogger
     {
         static void Main(string[] args)
         {
-            Tester.Tester.RunTest();
+            //Tester.Tester.RunTest();
+            Engine.Engine.Run();
+
         }
     }
 }

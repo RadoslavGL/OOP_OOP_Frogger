@@ -29,7 +29,7 @@ namespace Frogger.Tester
                 {
                     Swamp.Instance.Row = GenerateNum(randNum, 1, 16); //може да е на между редове с индекси 1 и 15
                     Swamp.Instance.X = GenerateNum(randNum, 0, 94); // може да е на позоция между 0 и 94 включително тя няма как със стрелките да излезе странично примерно извън екрана
-                    
+
                     if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                     {
                     }
@@ -40,21 +40,36 @@ namespace Frogger.Tester
                     }
                 }
 
+                //reading the keys in the tester class, acknowledging the borders of the screen
+                ConsoleKeyInfo key = Console.ReadKey();
+                if (key.Key == ConsoleKey.UpArrow &&
+                    Swamp.Instance.Row > 1) //so that it goes no further than the last safe zone
+                {
+                    Swamp.Instance.Row--;
+                }
+                else if (key.Key == ConsoleKey.DownArrow &&
+                    Swamp.Instance.Row < 15)
+                {
+                    Swamp.Instance.Row++;
+                }
+                else if (key.Key == ConsoleKey.LeftArrow &&
+                    Swamp.Instance.X > 2)
+                {
+                    Swamp.Instance.X -= GlobalConstants.frogStepToTheSides;
+                }
+                else if (key.Key == ConsoleKey.RightArrow &&
+                    Swamp.Instance.X < 95)
+                {
+                    Swamp.Instance.X += GlobalConstants.frogStepToTheSides;
+                }
+
                 Renderer.Renderer.Execute();
-                //Thread.Sleep(100);
                 //break;
-                
             }
-
-            
-                
-                
-
-
-
-
-
         }
+
+        
+
         public static int GenerateNum(Random randNum, int min, int max)
         {
             return randNum.Next(min, max);
