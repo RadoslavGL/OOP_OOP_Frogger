@@ -28,7 +28,7 @@ namespace Frogger.Tester
                 for (int i = (int)RowID.Zero; i <= (int)RowID.Fifteenth; i++)
                 {
                     Swamp.Instance.Row = GenerateNum(randNum, 1, 15); //може да е на между редове с индекси 1 и 15
-                    Swamp.Instance.X = GenerateNum(randNum, 0, 94); // може да е на позоция между 0 и 94 включително
+                    Swamp.Instance.X = GenerateNum(randNum, 0, 94); // може да е на позоция между 0 и 94 включително тя няма как със стрелките да излезе странично примерно извън екрана
                     
                     if (i == (int)RowID.Zero || i == (int)RowID.First || i == (int)RowID.Eighth || i == (int)RowID.Fifteenth)
                     {
@@ -36,14 +36,13 @@ namespace Frogger.Tester
                     else
                     {
                         ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 4);
-                        ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = GenerateNum(randNum, 0, 70);// GenerateNum(randNum, 0, 80);
-                        //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = GenerateNum(randNum, 1, 6);
+                        ((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X = GenerateNum(randNum, 0, 99);
                     }
                 }
 
                 Renderer.Renderer.Execute();
-                //Thread.Sleep(1000);
-                break;
+                //Thread.Sleep(400);
+                //break;
                 
             }
 

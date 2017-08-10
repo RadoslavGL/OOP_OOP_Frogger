@@ -36,36 +36,63 @@ namespace Frogger.Renderer.Models
 
         public override string ToString()
         {
+            //Каквото и да става да не се ползва VehichleLength за дължина на колата.
+            //VehicleLength е множител на пълнежа на количките => когато е например 3, колата е дълга 10
             if (base.HasFrog)
             {
-                if (Swamp.Instance.X >
+                if (Swamp.Instance.X >=
                     this.VehicleOnTheRow.X +
-                    this.VehicleOnTheRow.ToString().Split('*')[0].Length)
-                {
-                    return string.Format("{0}{1}{2}{3}\n{0}{4}{2}{5}\n{0}{6}{2}{7}", //празно, кола, празно, жаба\n
-                        new string(' ', this.VehicleOnTheRow.X),        //0
-                        this.VehicleOnTheRow.ToString().Split('*')[0],      //1
-                        new string(' ', Swamp.Instance.X - this.VehicleOnTheRow.X - this.VehicleOnTheRow.ToString().Split('*')[0].Length),    //2
-                        Swamp.Instance.ToString().Split('*')[0],            //3
-                        this.VehicleOnTheRow.ToString().Split('*')[1],      //4
-                        Swamp.Instance.ToString().Split('*')[1],            //5
-                        this.VehicleOnTheRow.ToString().Split('*')[2],      //6
-                        Swamp.Instance.ToString().Split('*')[2]);           //7
+                    this.VehicleOnTheRow.ToString().Split('*')[0].Length) //tova e taka, tuka sme se razbrali maxXjaba <=94
+                {//празно, кола, празно, жаба
+                    return string.Format("{0}{1}{2}{3}*{0}{4}{2}{5}*{0}{6}{2}{7}",
+                        new string(' ', this.VehicleOnTheRow.X),            //0, tova e taka
+                        this.VehicleOnTheRow.ToString().Split('*')[0],      //1, tova e taka
+                        new string(' ', Swamp.Instance.X - this.VehicleOnTheRow.X - this.VehicleOnTheRow.ToString().Split('*')[0].Length),    //2, tova e taka
+                        Swamp.Instance.ToString().Split('*')[0],            //3, tova e taka
+                        this.VehicleOnTheRow.ToString().Split('*')[1],      //4, tova e taka
+                        Swamp.Instance.ToString().Split('*')[1],            //5, tova e taka
+                        this.VehicleOnTheRow.ToString().Split('*')[2],      //6, tova e taka
+                        Swamp.Instance.ToString().Split('*')[2]);           //7, tova e taka
+
+                } //, tova e taka
+                else
+                {//празно, жаба, празно, кола
+                    if (this.VehicleOnTheRow.X <=                                                   //ако Х на колата е по-малко или равно 
+                GlobalConstants.ScreenWidth - this.VehicleOnTheRow.ToString().Split('*')[0].Length) //на размера на екрана минус размера на колата, който се задава динамично от генератор
+                    {
+                        return string.Format("{0}{1}{2}{3}*{0}{4}{2}{5}*{0}{6}{2}{7}",
+                        new string(' ', Swamp.Instance.X),              //0
+                        Swamp.Instance.ToString().Split('*')[0],        //1
+                        new string(' ', this.VehicleOnTheRow.X - Swamp.Instance.X - Swamp.Instance.ToString().Split('*')[0].Length),        //2
+                        this.VehicleOnTheRow.ToString().Split('*')[0],  //3
+                        Swamp.Instance.ToString().Split('*')[1],        //4
+                        this.VehicleOnTheRow.ToString().Split('*')[1],  //5
+                        Swamp.Instance.ToString().Split('*')[2],        //6
+                        this.VehicleOnTheRow.ToString().Split('*')[2]); //7
+                    }
+                    else //ако Х на колата е между размера на екрана минус дължината
+                         //на колата (динамична) и размера на екрана => трябва да се отреже малко от края й,
+                         //което става по следния начин:
+                         //string pesho = "asdfghjkl";
+                         //Console.WriteLine(pesho.Length); //9
+                         //Console.WriteLine(pesho.Remove(5)); //"asdfg"
+                    {
+                        return string.Format("{0}{1}*{0}{2}*{0}{3}",
+                        new string(' ', this.VehicleOnTheRow.X),
+                        this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
+                        this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
+                        this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1));
+                    }
                 }
-                else return "pesho";
-                //else if ()
-                //{
-                //}
-
-
+                
 
             }
             else
             {
-                if (this.VehicleOnTheRow.X <= //ако Х на колата е по-малко или равно 
-                (GlobalConstants.ScreenWidth - 1) - this.VehicleOnTheRow.VehicleLength) //на размера на екрана минус размера на колата, който се задава динамично от генератор
+                if (this.VehicleOnTheRow.X <=                                                       //ако Х на колата е по-малко или равно 
+                GlobalConstants.ScreenWidth - this.VehicleOnTheRow.ToString().Split('*')[0].Length) //на размера на екрана минус размера на колата, който се задава динамично от генератор
                 {
-                    return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                    return string.Format("{0}{1}*{0}{2}*{0}{3}",
                     new string(' ', this.VehicleOnTheRow.X),
                     this.VehicleOnTheRow.ToString().Split('*')[0],
                     this.VehicleOnTheRow.ToString().Split('*')[1],
@@ -78,16 +105,13 @@ namespace Frogger.Renderer.Models
                      //Console.WriteLine(pesho.Length); //9
                      //Console.WriteLine(pesho.Remove(5)); //"asdfg"
                 {
-                    return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
-                    new string(' ', this.VehicleOnTheRow.X), //това е така
-                    this.VehicleOnTheRow.ToString().Split('*')[0].
-                    Remove(GlobalConstants.ScreenWidth-this.VehicleOnTheRow.X),
-                    this.VehicleOnTheRow.ToString().Split('*')[1].
-                    Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X),
-                    this.VehicleOnTheRow.ToString().Split('*')[2].
-                    Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X));
+                    return string.Format("{0}{1}*{0}{2}*{0}{3}",
+                    new string(' ', this.VehicleOnTheRow.X),
+                    this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
+                    this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
+                    this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1));
                 }
-            }
+            } //работи
         }
     }
 }

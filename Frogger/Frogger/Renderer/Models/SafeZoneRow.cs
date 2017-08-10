@@ -21,7 +21,7 @@ namespace Frogger.Renderer.Models
         {
             if (base.HasFrog)
             {
-                return string.Format("{0}{1}\n{0}{2}\n{0}{3}",
+                return string.Format("{0}{1}*{0}{2}*{0}{3}",
                     new string(' ', Objects.Models.Swamp.Instance.X), //eventualno +/-1
                     Swamp.Instance.ToString().Split('*')[0],
                     Swamp.Instance.ToString().Split('*')[1],
