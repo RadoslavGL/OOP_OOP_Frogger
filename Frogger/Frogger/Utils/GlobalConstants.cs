@@ -10,7 +10,7 @@ namespace Frogger.Utils
     {
         public const int ScreenWidth = 100;
         public const int ScreenHeight = 49;
-        public static int delayer = 30;
+        public static int delayer = 75;
         public const int frogStepToTheSides = 3;
     }
 }

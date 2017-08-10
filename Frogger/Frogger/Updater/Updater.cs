@@ -21,6 +21,7 @@ namespace Frogger.Updater
             int gameSpeed = ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed;
             while (Swamp.Instance.IsAlive)
             {
+                gameSpeed = ((InfoRow)RowCollection.Instance.Rows.ElementAt(0)).Speed;
                 Renderer.Renderer.Execute();
 
                 FroggerMover();
@@ -39,7 +40,7 @@ namespace Frogger.Updater
                     {
                         //((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.VehicleLength = 2; //GenerateNum(randNum, 1, 4);
 
-                        if (((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X + 1 > 95)
+                        if (((LaneRow)RowCollection.Instance.Rows.ElementAt(i)).VehicleOnTheRow.X + 1 > 91)
                         {
                             VehicleSpeedModifier((LaneRow)RowCollection.Instance.Rows.ElementAt(i));
                             VehicleLengthModifier((LaneRow)RowCollection.Instance.Rows.ElementAt(i));
