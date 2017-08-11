@@ -24,7 +24,7 @@ namespace Frogger.Engine
             // - задава размерите на прозорчето;
             Console.SetWindowSize(GlobalConstants.screenWidth, GlobalConstants.screenHeight);
             //това не съм сигурен трябва ли не трябва ли, за сега не го включвам
-            //Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
 
             // - зареждане на жабата
             Swamp.Instance.IsAlive = true;
