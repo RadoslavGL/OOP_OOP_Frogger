@@ -22,7 +22,7 @@ namespace Frogger.Engine
             Renderer.Renderer.InitializeRenderer();
 
             // - задава размерите на прозорчето;
-            Console.SetWindowSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
+            Console.SetWindowSize(GlobalConstants.screenWidth, GlobalConstants.screenHeight);
             //това не съм сигурен трябва ли не трябва ли, за сега не го включвам
             //Console.SetBufferSize(GlobalConstants.ScreenWidth, GlobalConstants.ScreenHeight);
 
@@ -32,7 +32,10 @@ namespace Frogger.Engine
             // зарежда генератора на числа
             Random randNum = new Random();
 
-            
+            //that's for the Engine (in the Run method)
+            Console.WriteLine(GlobalConstants.welcomeFrogger);
+            Console.ReadKey();
+
             //сега палим мозъка
             Updater.Updater.StartGame();
         }
@@ -42,18 +45,18 @@ namespace Frogger.Engine
             return randNum.Next(min, max);
         }
 
-        private static int VehicleMovement(int input)
-        {
-            int result = input - GenerateNum(new Random(), 5, 15);
-            if (input < 0)
-            {
-                result = 99;
-            }
-            else
-            {
-                return result;
-            }
-            return result;
-        }
+        //private static int VehicleMovement(int input)
+        //{
+        //    int result = input - GenerateNum(new Random(), 5, 15);
+        //    if (input < 0)
+        //    {
+        //        result = 99;
+        //    }
+        //    else
+        //    {
+        //        return result;
+        //    }
+        //    return result;
+        //}
     }
 }

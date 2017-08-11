@@ -12,6 +12,7 @@ namespace Frogger
         #region Props
         int Lives { get; set; }
         bool IsAlive { get; set; }
+        int Level { get; set; }
         #endregion
     }
 }

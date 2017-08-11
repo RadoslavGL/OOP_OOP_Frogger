@@ -43,5 +43,22 @@ namespace Frogger.Engine.Screens
 
                 );
         }
+
+        public static string WellcomeScreen()
+        {
+            return @"                  ______" + "\n" +
+                                                        @"                 | ___ |" + "\n" +
+                                                        @"                 | | _ _ __ ___   __ _  __ _  ___ _ __" + "\n" +
+                                                        @"                 | _ | '__/ _ \ / _` |/ _` |/ _ | '__ |" + "\n" +
+                                                        @"                 | | | | | (_) | (_| | (_| |  __| |" + "\n" +
+                                                        @"                 \_| |_|  \___/ \__, |\__, |\___|_|   " + "\n" +
+                                                        @"                                 __/ | __/ |" + "\n" +
+                                                        @"                                |___/ |___/" + "\n" +
+                                                        @"" + "\n" +
+                                                        @"               You have three lives to conquer the road" + "\n" +
+                                                        @"                      as many times as possible" + "\n" +
+                                                        @"" + "\n" +
+                                                        @"                      Press any key to play...";
+        } 
     }
 }

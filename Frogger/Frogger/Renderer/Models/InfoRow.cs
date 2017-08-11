@@ -75,11 +75,11 @@ namespace Frogger.Renderer
                 '┐',                    //4
                 '|',                    //5
                 "SPEED:".PadLeft(13),   //6
-                this.speed.ToString().PadRight(12), //7
+                this.Speed.ToString().PadRight(12), //7
                 "LIVES:".PadLeft(13),               //8
                 string.Concat(Enumerable.Repeat("♥ ", this.Lives)).PadRight(12),    //9
                 "SCORE:".PadLeft(13),                                               //10
-                this.score.ToString().PadRight(12), //11
+                this.Score.ToString().PadRight(12), //11
                 '└',                                //12
                 '┴',                                //13
                 '┘');                               //14

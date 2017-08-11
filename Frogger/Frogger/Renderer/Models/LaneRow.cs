@@ -2,13 +2,8 @@
 using Frogger.Renderer.Abstract;
 using Frogger.Renderer.Contracts;
 using Frogger.Renderer.Enums;
-using Frogger.Renderer.RowCollection;
 using Frogger.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Frogger.Renderer.Models
 {
@@ -36,15 +31,13 @@ namespace Frogger.Renderer.Models
 
         public override string ToString()
         {
-            //Каквото и да става да не се ползва VehichleLength за дължина на колата.
-            //VehicleLength е множител на пълнежа на количките => когато е например 3, колата е дълга 10
             if (base.HasFrog)
             {
-                //ако на реда има жаба
                 if (Swamp.Instance.X >= this.VehicleOnTheRow.X + this.VehicleOnTheRow.ToString().Split('*')[0].Length)
-                //това е така, тука сме се разбрали максималния Х на жабата да е <=94, защото иначе ще излиза съобщение за умряла жаба и това изобщо няма да се вика и няма да се вика този ред
                 {
-                    //празно, кола, празно, жаба
+                    //Ако на реда има жаба и тя се намира след колата.
+                    //FrogXmax <= 94 от това следва, че със сигурност цялата тази история няма да излезе от екрана.
+                    //Изписва се: празно, кола, празно, жаба
                     return string.Format("{0}{1}{2}{3}*{0}{4}{2}{5}*{0}{6}{2}{7}",
                         new string(' ', this.VehicleOnTheRow.X),            //0, tova e taka
                         this.VehicleOnTheRow.ToString().Split('*')[0],      //1, tova e taka
@@ -57,11 +50,10 @@ namespace Frogger.Renderer.Models
                 }
                 else if (this.VehicleOnTheRow.X >= Swamp.Instance.X + Swamp.Instance.ToString().Split('*')[0].Length)
                 {
-                    //празно, жаба, празно, кола
-                    if (this.VehicleOnTheRow.X <= GlobalConstants.ScreenWidth - this.VehicleOnTheRow.ToString().Split('*')[0].Length)
-                    //ако Х на колата е по-малко или равно 
-                    //на размера на екрана минус размера на колата, който се задава динамично от генератор
+                    if (this.VehicleOnTheRow.X + this.VehicleOnTheRow.ToString().Split('*')[0].Length < GlobalConstants.screenWidth)
                     {
+                        //Ако на реда има жаба и тя се намира преди колата.
+                        //Ако "празно, жаба, празно, кола" не излиза от екрана.
                         return string.Format("{0}{1}{2}{3}*{0}{4}{2}{5}*{0}{6}{2}{7}",
                             new string(' ', Swamp.Instance.X),              //0
                             Swamp.Instance.ToString().Split('*')[0],        //1
@@ -74,25 +66,27 @@ namespace Frogger.Renderer.Models
                     }
                     else
                     {
-                        //ако Х на колата е между размера на екрана минус дължината
-                        //на колата (динамична) и размера на екрана => трябва да се отреже малко от края й,
-                        //което става по следния начин:
-                        //string pesho = "asdfghjkl";
-                        //Console.WriteLine(pesho.Length); //9
-                        //Console.WriteLine(pesho.Remove(5)); //"asdfg"
-                        return string.Format("{0}{1}*{0}{2}*{0}{3}",
-                            new string(' ', this.VehicleOnTheRow.X),
-                            this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
-                            this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
-                            this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1));
+                        //Ако на реда има жаба и тя се намира преди колата.
+                        //Ако "празно, жаба, празно, кола" излиза от екрана.
+                        return string.Format("{0}{1}{2}{3}*{0}{4}{2}{5}*{0}{6}{2}{7}",
+                            new string(' ', Swamp.Instance.X),                                                                                  //0
+                            Swamp.Instance.ToString().Split('*')[0],                                                                            //1
+                            new string(' ', this.VehicleOnTheRow.X-Swamp.Instance.X-Swamp.Instance.ToString().Split('*')[0].Length),            //2
+                            this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1),     //3
+                            Swamp.Instance.ToString().Split('*')[1],                                                                            //4
+                            this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1),     //5
+                            Swamp.Instance.ToString().Split('*')[2],                                                                            //6
+                            this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1));    //7
                     }
                 }
                 else
                 {
-                    if (Swamp.Instance.X + 10 < GlobalConstants.ScreenWidth &&
-                        this.VehicleOnTheRow.X + 13 < GlobalConstants.ScreenWidth &
-                        Math.Min(this.VehicleOnTheRow.X, Swamp.Instance.X) + 13 < GlobalConstants.ScreenWidth)
+                    if (Swamp.Instance.X + 10 < GlobalConstants.screenWidth &&
+                        this.VehicleOnTheRow.X + 13 < GlobalConstants.screenWidth &
+                        Math.Min(this.VehicleOnTheRow.X, Swamp.Instance.X) + 13 < GlobalConstants.screenWidth)
                     {
+                        //Ако на реда има жаба и тя се е изджасала в колата.
+                        //Ако са се изчеластрили преди края на реда.
                         return string.Format("{0}FrogX = {1}*{2}VehicleX = {3}*{4} => Collision", //n==13
                         new string(' ', Swamp.Instance.X),
                         Swamp.Instance.X,
@@ -102,6 +96,8 @@ namespace Frogger.Renderer.Models
                     }
                     else
                     {
+                        //Ако на реда има жаба и тя се е изджасала в колата.
+                        //Ако са се изчеластрили след края на реда.
                         return string.Format("{0}FrogX = {1}*{2}VehicleX = {3}*{4} => Collision", //n==13
                         new string(' ', 86),
                         Swamp.Instance.X,
@@ -113,11 +109,10 @@ namespace Frogger.Renderer.Models
             }
             else
             {
-                //ако на реда няма жаба
-                if (this.VehicleOnTheRow.X < GlobalConstants.ScreenWidth - this.VehicleOnTheRow.ToString().Split('*')[0].Length)
+                if (this.VehicleOnTheRow.X < GlobalConstants.screenWidth - this.VehicleOnTheRow.ToString().Split('*')[0].Length)
                 {
-                    //ако Х на колата е по-малко или равно 
-                    //на размера на екрана минус размера на колата, който се задава динамично от генератор
+                    //Ако на реда няма жаба.
+                    //Ако колата е преди края на екрана.
                     return string.Format("{0}{1}*{0}{2}*{0}{3}",
                         new string(' ', this.VehicleOnTheRow.X),
                         this.VehicleOnTheRow.ToString().Split('*')[0],
@@ -125,19 +120,16 @@ namespace Frogger.Renderer.Models
                         this.VehicleOnTheRow.ToString().Split('*')[2]);
                 }
                 else
-                {   
-                    //ако Х на колата е между размера на екрана минус дължината на колата (динамична)
-                    //и размера на екрана => трябва да се отреже малко от края й, което става по следния начин:
-                    //string pesho = "asdfghjkl";
-                    //Console.WriteLine(pesho.Length); //9
-                    //Console.WriteLine(pesho.Remove(5)); //"asdfg"
+                {
+                    //Ако на реда няма жаба.
+                    //Ако колата е след края на екрана.
                     return string.Format("{0}{1}*{0}{2}*{0}{3}",
                         new string(' ', this.VehicleOnTheRow.X),
-                        this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
-                        this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1),
-                        this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.ScreenWidth - this.VehicleOnTheRow.X - 1));
+                        this.VehicleOnTheRow.ToString().Split('*')[0].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1),
+                        this.VehicleOnTheRow.ToString().Split('*')[1].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1),
+                        this.VehicleOnTheRow.ToString().Split('*')[2].Remove(GlobalConstants.screenWidth - this.VehicleOnTheRow.X - 1));
                 }
-            } //работи
+            }
         }
     }
 }
